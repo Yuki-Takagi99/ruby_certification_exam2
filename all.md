@@ -1,5 +1,28 @@
 # Ruby技術者認定試験  まとめ
 
+1. String#index
+    - 探したい文字列パターンと検索開始位置を指定し、最初に見つかった部分文字列のインデックス番号を返す。
+    ```
+    p "hello!hello!hello!".index("!", 6)
+    #=> 11
+    検索開始位置は2番目の"h"
+    ```
+
+1. String#char
+    - chr
+        - selfの最初の文字だけを含む文字列を返す
+    ```
+    a = "abcde"
+    a.chr
+    #=> "a"
+    ```
+
+    - ord
+        - 文字列の最初の文字の文字コードを整数で返す
+    ```
+    p "a".ord   # => 97
+    ```
+
 1. String#chars
     - 文字列の各文字を文字列の**配列**で返す
     ```
@@ -11,6 +34,13 @@
     ```
     puts "0120-456-789".delete("^0-58-")
     => 0120-45-8
+    ```
+
+1. String#upcase
+    - 全ての小文字を対応する大文字に置き換えた文字列を返す
+    - **非破壊的メソッド**なので注意
+    ```
+    p "hello".upcase   # => "HELLO"
     ```
 
 1. String#upto
@@ -61,10 +91,30 @@
 
 1. Enumerable#find
     - 要素に対してブロックを評価した値がtrueになった**最初**の要素を返す
+    - detectメソッドも同様の
     ```
     enu = [1, 5, 8, 13, 17, 21, 28, 36].find { |n| n % 7 == 0 }
     print enu
     #=> 21
+    ```
+   
+1. Enumerable#each_with_index
+    - 要素とそのインデックスをブロックに渡して繰り返す
+    ```
+    ["apple", "orange", "grape"].each_with_index do |item, idx|
+      p [item, idx]
+    end
+    # => [5, 0]
+    #    [10, 1]
+    #    [15, 2]
+    ```
+
+1. Enumerable#map, collect
+    - 各要素に対してブロックを評価した結果を全て含む配列を返す
+    - mapとcollectは同じ動作をする！
+    ```
+    # すべて 3 倍にする
+    p [1, 2, 3].map {|n| n * 3 }  # => [3, 6, 9]
     ```
 
 1. Array#join
@@ -138,6 +188,18 @@
     => ["a", "c"]
     ```
 
+1. Array#shift, unshift
+    - shift
+        - 配列の先頭の要素を**破壊的に**取り除いてそれを返す。
+    - unshift
+        - 引数に指定された要素を配列の先頭に挿入する。**引数を指定しなければ何もしない！**
+
+1. Array#compact
+    - 自身からnilを取り除いた配列を生成して返す **非破壊的メソッドなので注意！**
+x
+1. Array#uniq
+    - 配列から重複した要素を取り除いた新しい配列を返す **非破壊的メソッドなので注意！**
+
 1. Hash#include?
     - ハッシュが引数の値をキーに持つとき、trueを返す
     
@@ -148,6 +210,13 @@
     student_2={:name => 'ito', :club => 'football'}
     p student_1.merge(student_2)
     => {:name=>"ito", :club=>"football"} student2のkeyとvalueで上書きされる
+    ```
+
+1. Hash#invert
+    - 値からキーへのハッシュを作成して返す
+    ```
+    h = { "a" => 0, "b" => 100, "c" => 200, "d" => 300, "e" => 300 }
+    p h.invert   #=> {0=>"a", 100=>"b", 200=>"c", 300=>"e"}
     ```
 
 1. Hash#fetch
@@ -169,6 +238,14 @@
     p h.delete(:ef){|key|"#{key} Nothing"} #=> "ef Nothing"
     
     p h #=> {:cd=>"all"}
+    ```
+
+1. Hash#reject
+    - ブロックを評価した値が真になる要素を削除したハッシュを返す
+    - **非破壊的メソッド**
+    ```
+    h = { 2 =>"8" ,4 =>"6" ,6 =>"4" ,8 =>"2" }
+    p h.reject{|key, value| key.to_i < value.to_i} #=> {6=>"4", 8=>"2"}
     ```
 
 1. IO#seek(offset, whence = IO::SEEK_SET)
