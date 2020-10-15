@@ -90,11 +90,31 @@
     p "foo\n\r".chomp  # => "foo\n"
     ```
    
+1. String#%
+    - フォーマットされた文字列を返す
+    - String#%を用いると、指示子(%)が引数の値で置換される。
+    ```
+    p "Hello%d" % 5
+    #=> "Hello5"
+    ```
+ 
 1. Integer#chr
     - 与えられたエンコーディングにおいてselfを文字コードと見た時、対応する文字列を返す
     ```
     0x65.chr(Encoding::UTF_8)
     #=> "e"
+    ```
+
+1. Enumerable#any?
+    - 全ての要素が偽である場合にfalseを返し、真である要素があれば、ただちにtrueを返す
+    ```
+    p [1, 2, 3].any? {|v| v > 3 }   # => false
+    p [1, 2, 3].any? {|v| v > 1 }   # => true
+    p [].any? {|v| v > 0 }          # => false
+    p %w[ant bear cat].any?(/d/)    # => false
+    p [nil, true, 99].any?(Integer) # => true
+    p [nil, true, 99].any?          # => true
+    p [].any?                       # => false
     ```
 
 1. Enumerable#find
@@ -138,6 +158,22 @@
     singer=["tanaka", "koyama"]
     p singer.shift
     #=> "tanaka"
+    ```
+
+1. Array#pop
+    - 自身の末尾から要素を取り除いてそれを返す。引数を指定した場合はその個数だけ取り除き、それを配列で返す。
+    ```
+    array = [1, [2, 3], 4]
+    p array.pop      # => 4
+    p array.pop      # => [2, 3]
+    p array          # => [1]
+    
+    p array.pop      # => 1
+    p array.pop      # => nil
+    p array          # => []
+    array = [1, 2, 3]
+    p array.pop(2)   #=> [2, 3]
+    p array          #=> [1]
     ```
    
 1. Array#sort
@@ -212,9 +248,18 @@
 
 1. Array#compact
     - 自身からnilを取り除いた配列を生成して返す **非破壊的メソッドなので注意！**
-x
+
 1. Array#uniq
     - 配列から重複した要素を取り除いた新しい配列を返す **非破壊的メソッドなので注意！**
+
+1. Array#find_all
+    - 各要素に対してブロックを評価した値が真であった要素を全て含む配列を返す。
+    - 真になる要素がひとつもなかった場合は空の配列を返す。
+    - find_allとselectは同様の動作をする
+    ```
+    (1..10).find_all                        # => #<Enumerator: 1..10:find_all>
+    (1..10).find_all { |i| i % 3 == 0 }     # => [3, 6, 9]
+    ```
 
 1. Hash#include?, has_key?
     - ハッシュが引数の値をキーに持つとき、trueを返す
@@ -222,7 +267,7 @@ x
     p({1 => "one"}.has_key?(1)) #=> true
     p({1 => "one"}.include?(1)) #=> true
     ```
-    
+
 1. Hash#merge
     - ハッシュの内容を順番にマージ(統合)した結果を返す。
     ```
@@ -347,10 +392,10 @@ x
     ```
 
 1. 〜進数
-    - 0d, 0x, 0o, 0b はそれぞれ、10進数、16進数、8進数、2進数を意味します。
+    - 0x, 0d, 0o, 0b はそれぞれ、16進数、10進数、8進数、2進数を意味します。
     ```
-    num = 0d1234       // 10進数 (0dで始まる数値は10進数とみなされる)
     num = 0xffff       // 16進数 (0xで始まる数値は16進数とみなされる)
+    num = 0d1234       // 10進数 (0dで始まる数値は10進数とみなされる)
     num = 0o777        //  8進数 (0oで始まる数値は 8進数とみなされる)
     num = 0b11000100   //  2進数 (0bで始まる数値は 2進数とみなされる)
     ```
@@ -380,4 +425,14 @@ x
     など
     ```
 
-1. 
+1. ヒアドキュメント
+    - <<識別子 から 識別子 の直前までを文字列として扱う
+    - <<-識別子とした場合は、インデントを加えることができる
+    ```
+    s = <<-EOF
+          Hello,
+          Ruby
+          EOF
+    p s
+    #=> "      Hello,\n      Ruby\n"
+    ```
