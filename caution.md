@@ -228,3 +228,18 @@
    eql?メソッドは同値性を判定。値と型が等しければtrueを返し、異なればfalseを返す。
    equal?メソッドは同一性を判定。2つのオブジェクトが同一かどうかを判定し、等しければtrue, 異なればfalseを返す。
    ```
+
+1. Rubyの予約語として適切な物を選びなさい。（２つ選択）
+
+    ```
+    1. while
+    2. rand
+    3. goto
+    4. class
+    5. const
+    
+    正解: 1,4
+    Rubyの予約語・・・while, class
+    それ以外・・・rand, goto, const 
+    ```
+
