@@ -21,6 +21,16 @@
    ここでは、末尾が"\r\n"ではなく、"\n\r"なので、末尾の"\r"のみが取り除かれる。
    ```
 
+1. 下記コードの実行結果を選択肢の中から選べ。
+   ```
+   music = "Jazz\nRock\rTechno\n\r!"
+   music.chop
+   p music
+   
+   #=> "Jazz\nRock\rTechno\n\r!"
+   chopメソッドは非破壊的メソッドなので、ひっかけ問題。
+   ```
+
 1. 下記コードの実行結果を、選択肢の中から選べ。
    
    ```
@@ -239,7 +249,14 @@
     5. const
     
     正解: 1,4
-    Rubyの予約語・・・while, class
+    Rubyの予約語
+        BEGIN   class       ensure  nil     self    when
+        END     def         false   not     super   while
+        alias   defined?    for     or      then    yield
+        and     do          if      redo    true    __LINE__
+        begin   else        in      rescue  undef   __FILE__
+        break   elsif       module  retry   unless  __ENCODING__
+        case    end         next    return  until
     それ以外・・・rand, goto, const 
     ```
 
