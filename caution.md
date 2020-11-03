@@ -976,3 +976,20 @@
     従って出題コードは、ファイルdataの先頭文字aを読んで表示する処理を繰り返します。
     ```
 
+1. 以下のコードを実行したときの出力として適切な物を1つ選択してください。
+
+    ```
+    str = "RubyAssociation\r\n".chop
+    
+    選択肢
+    A."RubyAssociation"
+    B."RubyAssociation\r"
+    C."RubyAssociation\r\n"
+    D."RubyAssociation\r\n\r\n"
+    
+    #=> A
+    String#chopは文字列末尾の文字を1文字削除するためのメソッド。
+    String#chompが改行文字を対象するのに対しchopはすべての文字を対象とする。
+    ただし、文字列末尾が\r\nの場合は、2文字とも削除します。
+    String#chop!はレシーバーの文字列自体を変更する破壊的メソッドです。
+    ```
