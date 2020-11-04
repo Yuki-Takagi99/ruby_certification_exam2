@@ -1,7 +1,6 @@
-chars = "I love apple, banana and grape"
-
-5.times do
-  chars = chars.sub("a", "@")
-end
-
-p chars
+s = ["one", "two", "three"]
+s.pop
+s.pop
+s.unshift
+s.push "four"
+p s
