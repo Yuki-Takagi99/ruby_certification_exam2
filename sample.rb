@@ -1,6 +1,9 @@
-s = ["one", "two", "three"]
-s.pop
-s.pop
-s.unshift
-s.push "four"
-p s
+begin
+  puts 1+"2"
+rescue
+  puts "Error"
+rescue TypeError
+  puts "Type Error."
+ensure
+  puts "Ensure"
+end

@@ -1338,4 +1338,82 @@
     Hash#delete(:key)はレシーバーからkeyの項目を削除します。
     このメソッドは破壊的メソッドです。
     ```
+   
+***
 
+1. 以下のコードを実行するとどうなりますか。
+    ```
+    x = 0
+    def hoge
+        (1...5).each do |i|
+            x += 1
+        end
+        puts x
+        end
+    end
+    hoge
+   
+    選択肢
+    (a) 4が表示される
+    (b) 5が表示される
+    (c) 例外が発生する
+    (d) 0が表示される
+   
+    正解 (c) 例外が発生する
+    メソッド内と外では、変数名が同じでも別の変数として扱われる。
+    hogeメソッド内の x += 1の部分でxが定義されていないため例外が生じる。
+    ```
+
+1. 以下のコードを実行するとどうなりますか。正しいものを全て選択してください。
+    
+    ```
+    begin
+        puts 1+"2"
+    rescue
+        puts "Error"
+    rescue TypeError
+        puts "Type Error."
+    ensure
+        puts "Ensure"
+    end
+   
+    選択肢
+    (a) 3と表示される
+    (b) Error.と表示される
+    (c) Type Error.と表示される
+    (d) Ensure.と表示される
+   
+    正解 (b), (d)
+    rescue節で例外型を省略した場合、StandardErrorとそのサブクラスを捕捉する。
+    puts 1 + "2"で捕捉される例外はTypeErrorだが、StandardErrorのサブクラスなので、
+    最初のrescue節で捕捉され、"Error"と表示される。
+    また、ensure節が実行される。
+    ```
+
+1. 以下のコードを実行するとどうなりますか。
+
+    ```
+    s = "Hello"
+    def s.greet
+        puts "Hi!"
+    end
+   
+    class String
+        def greet
+            puts "Hello!"
+        end
+    end
+    s.greet
+   
+    選択肢
+    (a) エラーとなる。
+    (b) 何も表示されない
+    (c) Hi!と表示される
+    (d) Hello!と表示される
+   
+    正解 (c) Hi!と表示される
+    Stringクラスを拡張して作ったgreetメソッドよりも、特異メソッドの方が優先して実行されるため、
+    Hi!と表示される。
+    ```
+   
+1. 
