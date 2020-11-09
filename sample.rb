@@ -1,9 +1,11 @@
-begin
-  puts 1+"2"
-rescue
-  puts "Error"
-rescue TypeError
-  puts "Type Error."
-ensure
-  puts "Ensure"
+Foo = "main"
+
+class Bar
+  Foo = "foo"
+
+  def self.foo
+    ::Foo
+  end
 end
+
+p Bar.foo
